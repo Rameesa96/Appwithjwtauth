@@ -48,13 +48,25 @@ const LoginUser = asyncHandler(async(req,res) => {
 
     const {email,password}=req.body
 try{
+    const {email,password}=req.body
+    if( !email || !password){
+     res.status(400).send("Please add all fields")
+     throw new Error("User already exist")
+     
+    }
     const user = await User.findOne({email})
+    if(!user){
+        res.status(404).send("User Does Not Exist")
+    }
     if(user && (await bcrypt.compare(password,user.password))){
         res.status(200).json({_id:user._id,
             name:user.name,
             password:user.password,
             email:user.email,
             token:GenerateJWT(user._id)})
+    }
+    else{
+        res.status(404).send("Password Incorrect")
     }
 }
 catch(err){
