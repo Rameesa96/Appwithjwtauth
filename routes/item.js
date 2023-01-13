@@ -24,7 +24,7 @@ router.post('/',protect,upload,postitem)
 router.get('/',protect,getitem)
 router.delete('/:id',protect,deleteitem)
 router.put('/edit/:id',protect,upload,edititem)
-router.get('/:id',geteachitem)
+router.get('/:id',protect,geteachitem)
 
 
 
