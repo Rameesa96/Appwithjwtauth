@@ -8,7 +8,7 @@ const postitem = asyncHandler(async(req,res)=>{
     name:req.body.name,
     description:req.body.description,
     price:req.body.price,
-    image: req.file.path
+    // image: req.file.path
    })
     try{
      const newitem = await item.save()
@@ -20,12 +20,14 @@ const postitem = asyncHandler(async(req,res)=>{
 })
 
 const edititem = asyncHandler(async(req,res)=>{
+   
     try{
+      
     const item = await Item.findByIdAndUpdate(req.params.id,{$set:{
      name:req.body.name,
      description:req.body.description,
      price:req.body.price,
-     image: req.file.path
+    //  image: req.file.path
     }
     },{new:true})
      res.status(200).json(item)
@@ -47,6 +49,7 @@ res.status(200).json("deleted")
 
  const  getitem = asyncHandler(async(req,res)=>{
     try{
+      
 const item =await Item.find()
 res.status(200).json(item)
 }

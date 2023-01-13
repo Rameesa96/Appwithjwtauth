@@ -13,7 +13,7 @@ price:{
 },
 image: {
     type: String,
-    required: true,
+    // required: true,
     get: (image) => `${process.env.APP_URL}/${image}`,
   },
         

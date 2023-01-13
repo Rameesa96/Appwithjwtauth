@@ -21,7 +21,7 @@ mongoose.connection.on("error",()=>{
 app.get('/',(req,res)=>{
     res.send("server running")
 })
-
+app.use("/uploads" , express.static("uploads"))
 app.use(cors())
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));

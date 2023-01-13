@@ -1,6 +1,7 @@
 const express =require('express')
 const router =express.Router()
 const {postitem,deleteitem,edititem,getitem,geteachitem}=require('../Controller/item')
+const {protect} =require('../middleware/auth')
 
 const fs = require("fs")
 const multer = require("multer")
@@ -19,11 +20,11 @@ const upload = multer({
     storage:storage
 }).single('image')  
 
-router.post('/',upload,postitem)
-router.get('/',getitem)
-router.delete('/delete',deleteitem)
-router.put('/edit/:id',upload,edititem)
-router.get('/:id',geteachitem)
+router.post('/',protect,upload,postitem)
+router.get('/',protect,getitem)
+router.delete('/:id',protect,deleteitem)
+router.put('/edit/:id',protect,upload,edititem)
+router.get('/:id',protect,geteachitem)
 
 
 
